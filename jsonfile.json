@@ -1,0 +1,45 @@
+//# import json
+//# with open('image.json') as f:
+//#    data = json.load(f)
+//# print(data)
+//# ----------------------------------
+//# import json
+//# def write_json(new_data, filename='image.json'):
+//#     with open(filename, 'r+') as file:
+//#         file_data = json.load(file)
+//#         file_data["image_details"].append(new_data)
+//#         file.seek(0)
+//#         json.dump(file_data, file, indent=4, sort_keys=True)
+//# y = {
+//#             "file_name": "animal",
+//#             "file_size": "2050mb",
+//#             "img_res": "400px",
+//#             "img_name": "lion",
+//#             "no_od_obj": "8",
+//#             "obj_res": "350px"
+//#       }
+//# write_json(y)
+//# ------------------------------------------------------------------
+import json
+class Base:
+    def openfile(self):
+        self.fname=open("image.json","r+")
+class Derived(Base):
+    def read(self):
+        self.data=json.load(self.fname)
+    def write(self,content):
+        self.data["image_details"].append(content)
+        self.fname.seek(0)
+        json.dump(self.data,self.fname,indent=4)
+content={
+            "file_name": "Television",
+            "file_size": "250mb",
+            "img_name": "samsung",
+            "img_res": "450px",
+            "no_od_obj": "10",
+            "obj_res": "250px"
+}
+d=Derived()
+d.openfile()
+d.read()
+d.write(content)
